@@ -10,10 +10,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      gridTemplateRows: {
-        "game-row": "repeat(3, 30px)",
+      lineHeight: {
+        tight: "1.2",
       },
     },
   },
+
   plugins: [],
 };
