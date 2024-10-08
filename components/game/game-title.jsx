@@ -18,7 +18,7 @@ export function GameTitle() {
 
     <h1 className="text-4xl leading-tight">Кресики нолики</h1>
 
-    <div className="flex items-center gap-3 text-xs"> 
+    <div className="flex items-center gap-3 text-xs text-slate-400"> 
       <StarIcon/>
 
       <div className="flex items-center gap-1">
