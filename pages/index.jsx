@@ -1,5 +1,4 @@
 import { GameField, GameInfo, GameTitle } from "../components/game";
-
 import { Header } from "../components/header";
 
 export default function HomePage() {
@@ -8,7 +7,7 @@ export default function HomePage() {
   <main className="pt-6 mx-auto w-max">
     <GameTitle />
     <GameInfo className="mt-4"/>
-    <GameField className="mt-6"/>
+    <GameField className="mt-6"/> 
 
   </main>
   </div>;
