@@ -1,43 +1,12 @@
 import clsx from "clsx";
-import { ZeroIcon } from "./icons/zero-icon";
-import { CrossIcon } from "./icons/cross-icon";
 import { UiButton } from "../uikit/ui-button";
-import { useState } from "react";
-import { GAME_SYMBOL } from "./constans"
 import { GameSymbol } from "./game-symbol";
-
-
-const MOVE_ORDER = [
-  GAME_SYMBOL.CROSS,
-  GAME_SYMBOL.ZERO,
-  GAME_SYMBOL.TRINGLE,
-  GAME_SYMBOL.SQUARE,
-]
-
-function getNextMove(currentMove) {
-  const nextMoveIndex = MOVE_ORDER.indexOf(currentMove) + 1;
-  return MOVE_ORDER[nextMoveIndex] ?? MOVE_ORDER[0];
-}
+import { useGameState } from "./use-game-state";
 
 export function GameField({ className }) {
-  const [{cells, currentMove}, setGameState] = useState(() => ({
-    cells: new Array(19 * 19).fill(null),
-    currentMove: GAME_SYMBOL.ZERO,
-  }))
+  const{cells, currentMove, handleCellclick, nextMove} = useGameState();
 
-const nextMove = getNextMove(currentMove);
-
-const handleCellclick = (index) =>  {
-  setGameState((lastGameState) =>({
-...lastGameState,
-currentMove: getNextMove(lastGameState.currentMove),
-cells: lastGameState.cells.map((cell, i) => 
-  i === index? lastGameState.currentMove : cell 
-),
-  }));
-}
-
-const actions = (
+  const actions = (
   <>
   <UiButton size="mb" variant="primary">
   Ничья
