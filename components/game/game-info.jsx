@@ -42,7 +42,13 @@ const players = [
   },
 ];
 
-export function GameInfo({ className, playersCount, currentMove, isWinner, onPlayerTimeOver }) {
+export function GameInfo({
+  className,
+  playersCount,
+  currentMove,
+  isWinner,
+  onPlayerTimeOver,
+}) {
   return (
     <div
       className={clsx(
@@ -65,7 +71,7 @@ export function GameInfo({ className, playersCount, currentMove, isWinner, onPla
 
 function PlayerInfo({ playerinfo, isRight, isTimerRunning, onTimeOver }) {
   const [seconds, setSecond] = useState(60);
-  
+
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, "0");
   const secondsString = String(seconds % 60).padStart(2, "0");
   const isDanger = seconds < 10;
@@ -79,7 +85,7 @@ function PlayerInfo({ playerinfo, isRight, isTimerRunning, onTimeOver }) {
       return () => {
         clearInterval(interval);
         setSecond(60);
-      }
+      };
     }
   }, [isTimerRunning]);
 
@@ -87,16 +93,15 @@ function PlayerInfo({ playerinfo, isRight, isTimerRunning, onTimeOver }) {
     if (seconds === 0) {
       onTimeOver();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds]);
 
-
-const getTimerColor = () => {
-  if (isTimerRunning){
-    return isDanger ? "text-orange-600" : "text-slate-900";
-  }
-  return 'text-slate-200'
-}
+  const getTimerColor = () => {
+    if (isTimerRunning) {
+      return isDanger ? "text-orange-600" : "text-slate-900";
+    }
+    return "text-slate-200";
+  };
   return (
     <div className="flex gap-3 items-center">
       <div className={clsx("relative", isRight && "order-3")}>
@@ -115,7 +120,7 @@ const getTimerColor = () => {
         className={clsx(
           "text-lg font-semibold w-[60px]",
           isRight && "order-1",
-          getTimerColor()
+          getTimerColor(),
         )}
       >
         {minutesString}:{secondsString}{" "}
