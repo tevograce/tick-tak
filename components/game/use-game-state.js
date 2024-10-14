@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { GAME_SYMBOL, MOVE_ORDER } from "./constans";
+import { GAME_SYMBOL} from "./constans";
+import { computerWinner, getNextMove } from "./model";
 
-function getNextMove(currentMove, playersCount) {
-  const slicedMpveOrder = MOVE_ORDER.slice(0, playersCount)
-  const nextMoveIndex = slicedMpveOrder.indexOf(currentMove) + 1;
-  return slicedMpveOrder[nextMoveIndex] ?? slicedMpveOrder[0];
-}
 
 export function useGameState(playersCount) {
-  const [{ cells, currentMove }, setGameState] = useState(() => ({
+  const [{ cells, currentMove, playersTimeOver }, setGameState] = useState(() => ({
     cells: new Array(19 * 19).fill(null),
     currentMove: GAME_SYMBOL.CROSS,
+    playersTimeOver: [],
   }));
 
-  const nextMove = getNextMove(currentMove, playersCount);
+  const winnerSequence = computerWinner(cells);
+  const nextMove = getNextMove(currentMove, playersCount, playersTimeOver);
+
+  const winnerSymbol = nextMove === currentMove ? currentMove : winnerSequence?.[0];
 
   const handleCellclick = (index) => {
     setGameState((lastGameState) => {
@@ -22,9 +22,29 @@ export function useGameState(playersCount) {
       }
       return {
         ...lastGameState,
-        currentMove: getNextMove(lastGameState.currentMove, playersCount),
+        currentMove: getNextMove(
+          lastGameState.currentMove, 
+          playersCount,
+          lastGameState.playersTimeOver
+        
+        ),
         cells: lastGameState.cells.map((cell, i) =>
           i === index ? lastGameState.currentMove : cell,
+        ),
+      };
+    });
+  };
+
+  const HandlePlayerTimeOver = (symbol) => {
+    setGameState((lastGameState) => {
+
+      return {
+        ...lastGameState,
+        playersTimeOver: [...lastGameState.playersTimeOver, symbol],
+        currentMove: getNextMove(
+          lastGameState.currentMove, 
+          playersCount, 
+          lastGameState.playersTimeOver
         ),
       };
     });
@@ -35,5 +55,8 @@ export function useGameState(playersCount) {
     currentMove,
     nextMove,
     handleCellclick,
+    HandlePlayerTimeOver,
+    winnerSequence,
+    winnerSymbol,
   };
 }
