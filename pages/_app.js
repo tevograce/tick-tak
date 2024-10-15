@@ -8,6 +8,7 @@ export default function App({ Component, getProps }) {
   return (
     <div className={clsx(inter.className, "text-slate-900")}>
       <Component {...getProps} />
+      <div id="modals"></div>
     </div>
   );
 }

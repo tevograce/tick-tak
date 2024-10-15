@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 /**
  * @param {{
@@ -18,7 +19,9 @@ export function UiModel({
   onClose,
 }) {
   const handleClick = (e) => {
-    
+    const inModal = e.target.closest("[data-id=modal]");
+    if(inModal) return;
+      
     onClose();
   };
 
@@ -26,7 +29,7 @@ export function UiModel({
     return null;
   }
 
-  return (
+  const modal = (
     <div
     onClick={handleClick}
       className={clsx(
@@ -35,6 +38,7 @@ export function UiModel({
       )}
     >
       <div
+      data-id="modal"
         className={clsx(
           "bg-white rounded-lg min-h-[320px] mx-auto relative",
           "flex flex-col",
@@ -58,6 +62,8 @@ export function UiModel({
       </div>
     </div>
   );
+
+  return createPortal(modal, document.getElementById('modals'));
 }
 
 UiModel.Header = function UiModalHeader({ children, className }) {
