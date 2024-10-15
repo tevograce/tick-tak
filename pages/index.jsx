@@ -7,6 +7,8 @@ import {
 } from "../components/game";
 import { Header } from "../components/header";
 import { GameSymbol } from "../components/game/game-symbol";
+import { UiModel } from "../components/uikit/ui-model";
+import { UiButton } from "../components/uikit/ui-button";
 
 export default function HomePage() {
   const [playersCount] = useState(2);
@@ -37,6 +39,22 @@ export default function HomePage() {
             <GameSymbol symbol={winnerSymbol} />
           </div>
         )}
+      <UiModel width="md" isOpen={winnerSymbol} onClose={() => console.log('BAGGG')}>
+          <UiModel.Header> Игра завершена! </UiModel.Header>
+          <UiModel.Body>
+            <div className="text-sm">Победитель: <span className="text-teal-600">Joohn Sina</span></div>
+          </UiModel.Body>
+          <UiModel.Footer> 
+
+            <UiButton size="mb" variant="outline">
+              Вернуться 
+            </UiButton>
+            <UiButton size="mb" variant="primary">
+              Играть снова
+            </UiButton>
+
+         </UiModel.Footer>
+        </UiModel>
 
         <GameField
           className="mt-6"
