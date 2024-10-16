@@ -1,6 +1,5 @@
-
-export function computerWinner(cells, sequenceSize = 5, fieldSize = 19) {
-
+export function computeWinner(gameState, sequenceSize = 5, fieldSize = 19) {
+  const cells = gameState.cells;
   const gap = Math.floor(sequenceSize / 2);
 
   function compareElements(indexes) {
