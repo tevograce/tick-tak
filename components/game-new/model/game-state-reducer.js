@@ -1,5 +1,5 @@
 import {GAME_SYMBOL} from "../ui/constans"
-
+import { getNextMove } from "./get-Next-Move";
 
 export const GAME_STATE_ACTIONS = {
   CELL_CLICK: "cell-click",

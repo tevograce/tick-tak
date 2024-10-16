@@ -26,11 +26,12 @@ export function Game() {
     initGameState,
   );
 
-  const winnerSequence = computeWinner(gameState.cells);
-  const nextMove = getNextMove(gameState.currentMove, PLAYERS_COUNT, []);
-  const winnerSymbol = computeWinnerSymbol(gameState, {winnerSequence, nextMove})
+  const winnerSequence = computeWinner(gameState);
+  const nextMove = getNextMove(gameState);
+  const winnerSymbol = computeWinnerSymbol(gameState, {winnerSequence, nextMove});
 
   const winnerPlayer = PLAYERS.find((player) => player.symbol === winnerSymbol);
+  const { cells, currentMove } = gameState;
 
   return (
     <>
