@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowLeftIcon } from "./icons/arrow-left-icon";
-import { StarIcon } from "./icons/star-icon";
-import { UserIcon } from "./icons/users-icon";
-import { HistoryIcon } from "./icons/history-time";
+import { ArrowLeftIcon } from "../game-new/ui/icons/arrow-left-icon";
+import { StarIcon } from "../game-new/ui/icons/star-icon";
+import { UserIcon } from "../game-new/ui/icons/users-icon";
+import { HistoryIcon } from "../game-new/ui/icons/history-time";
 
 export function GameTitle({ playersCount }) {
-  return <div className="pl-2 ">
+  return 
+  <div className="pl-2 ">
     
     <Link 
     href="#" 

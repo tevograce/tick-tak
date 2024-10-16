@@ -58,7 +58,7 @@ export function GameInfo({
     >
       {players.slice(0, playersCount).map((player, index) => (
         <PlayerInfo
-          key={players.id}
+          key={player.id} // было players
           playerinfo={player}
           isRight={index % 2 === 1}
           onTimeOver={() => onPlayerTimeOver(player.symbol)}
