@@ -21,8 +21,8 @@ export const MOVE_ORDER = [
 export const PLAYERS = [
   {
     id: 1,
-    name: "Parovovevg",
-    rating: 1230,
+    name: "Paravoi",
+    rating: 777,
     avatar: avatarSrc1,
     symbol: GAME_SYMBOL.CROSS,
   },
@@ -30,7 +30,7 @@ export const PLAYERS = [
   {
     id: 2,
     name: "Lera",
-    rating: 12,
+    rating: 13,
     avatar: avatarSrc2,
     symbol: GAME_SYMBOL.ZERO,
   },
@@ -38,7 +38,7 @@ export const PLAYERS = [
   {
     id: 3,
     name: "Сакса",
-    rating: 432,
+    rating: 111,
     avatar: avatarSrc3,
     symbol: GAME_SYMBOL.TRINGLE,
   },
@@ -46,7 +46,7 @@ export const PLAYERS = [
   {
     id: 4,
     name: "Чип",
-    rating: 1,
+    rating: 888,
     avatar: avatarSrc4,
     symbol: GAME_SYMBOL.SQUARE,
   },

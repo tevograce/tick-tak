@@ -2,8 +2,6 @@ import clsx from "clsx";
 import { GameSymbol } from "./game-symbol";
 import Image from "next/image";
 import { useNow } from "../../lib/timers";
-import { memo } from "react";
-
 
 export function PlayerInfo({
   isRight,
