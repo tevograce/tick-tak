@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 /**
  * @param {{
  * label?: string,
@@ -6,8 +8,6 @@
  * className: string,
  * } & import('react').HTMLAttributes<HTMLInputElement>} props
  */
-
-import clsx from "clsx";
 
 export function UiTextField({
   label,
