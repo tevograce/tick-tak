@@ -19,7 +19,7 @@ import { getNextMove } from "./model/get-Next-Move";
 import { computePlayerTimer } from "./model/compute-player-timer";
 import { useInterval } from "../lib/timers";
 
-const PLAYERS_COUNT = 2;
+const PLAYERS_COUNT = 4;
 
 export function Game() {
   const [gameState, dispatch] = useReducer(

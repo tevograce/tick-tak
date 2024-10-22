@@ -15,15 +15,8 @@ export default function HomePage() {
   return (
     <HomePageLayout header={<Header />}>
   
-      <UiSelectField 
-      label="Label "
-      placeholder="Placeholder"
-      required
-      helperText="helper text"
-      options={options}
-      />
-
-
+     
+      <Game />
 
     </HomePageLayout>
   );
@@ -37,3 +30,12 @@ function HomePageLayout({ header, children }) {
     </div>
   );
 }
+
+
+// <UiSelectField 
+// label="Label "
+// placeholder="Placeholder"
+// required
+// helperText="helper text"
+// options={options}
+// />
