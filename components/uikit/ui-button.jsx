@@ -9,7 +9,7 @@ import clsx from "clsx"
  * }} props
  */
 
-export function UiButton({ children, className, size, variant }) {
+export function UiButton({ children, className, size, variant, disabled }) {
   
     const ButtonClassname = clsx(
       'transition-colors', 
@@ -19,7 +19,7 @@ export function UiButton({ children, className, size, variant }) {
         lg: "rounded-lg px-5 py-2 text-2xl leading-tight",
       }[size],
       {
-        primary: "bg-teal-600 hover:bg-teal-500  text-white ",
+        primary: "bg-teal-600 text-white ",
         outline: "border border-teal-600 text-teal-600 hover:bg-teal-50" ,
 
       }[variant],
@@ -28,6 +28,6 @@ export function UiButton({ children, className, size, variant }) {
 
 
 return (
-    <button className={ButtonClassname}>{children}</button>
+    <button disabled={disabled} className={ButtonClassname}>{children}</button>
   )
 }
