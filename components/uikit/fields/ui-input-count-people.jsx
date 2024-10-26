@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { UiButton } from "../ui-button";
 import clsx from "clsx";
 
-export function InputPersCount() {
+
+
+export function InputPersCount({ onGameStart }) {
   const [input, setInput] = useState(""); // то что ввел
   const [inputDiry, setInputDiry] = useState(false); // тут проверяем нажато ли поле ввода
   const [inputError, setInputError] = useState("Нужно ввести число"); // тут вылезет ошибка если не ввели
@@ -40,10 +42,17 @@ export function InputPersCount() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(formValid) {
+      onGameStart(parseInt(input));
+    }
+  }
+
   function Label() {
     return (
       <div>
-        <label className="mb-1 block text-sm">Введите количество игроков</label>
+        <label className="mb-1 block text-sm text-zinc-500">Введите количество игроков</label>
       </div>
     );
   }
@@ -51,7 +60,7 @@ export function InputPersCount() {
   return (
     <div className="mx-auto max-w-xs">
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           {inputDiry && inputError ? (
             <div className="text-red-700"> {inputError}</div>
           ) : (
@@ -62,14 +71,13 @@ export function InputPersCount() {
             <input
               onChange={texthandler}
               onBlur={(e) => blurHandler(e)}
-              id="input-submit"
-              for={1}
               type="text"
               name="count"
               className="p-1 w-full h-10 rounded-md text-xl outline-none border-4 border-teal-600/30 hover:border-teal-600"
             />
 
             <UiButton
+              type="submit"
               disabled={!formValid}
               className={clsx("mt-1", {
                 "bg-gray-400 cursor-not-allowed": !formValid,

@@ -19,13 +19,11 @@ import { getNextMove } from "./model/get-Next-Move";
 import { computePlayerTimer } from "./model/compute-player-timer";
 import { useInterval } from "../lib/timers";
 
-const PLAYERS_COUNT = 4;
-
-export function Game() {
+export function Game({ playersCount }) {
   const [gameState, dispatch] = useReducer(
     gameStateReducer,
     {
-      playersCount: PLAYERS_COUNT,
+      playersCount,
       defaultTimer: 60000,
       currentMoveStart: Date.now(),
     },
@@ -52,14 +50,13 @@ export function Game() {
 
   const winnerPlayer = PLAYERS.find((player) => player.symbol === winnerSymbol);
 
-const handleCellClick = useCallback((index) => {
-  dispatch({
-    type: GAME_STATE_ACTIONS.CELL_CLICK,
-    index,
-    now: Date.now(),
-  });
-}, []);
-
+  const handleCellClick = useCallback((index) => {
+    dispatch({
+      type: GAME_STATE_ACTIONS.CELL_CLICK,
+      index,
+      now: Date.now(),
+    });
+  }, []);
 
   const { cells, currentMove } = gameState;
 
@@ -71,11 +68,11 @@ const handleCellClick = useCallback((index) => {
         gameInfo={
           <GameInfo
             isRatinGame
-            playersCount={PLAYERS_COUNT}
+            playersCount={playersCount}
             timeMode={"1 мин. на ход"}
           />
         }
-        playerList={PLAYERS.slice(0, PLAYERS_COUNT).map((player, index) => {
+        playerList={PLAYERS.slice(0, playersCount).map((player, index) => {
           const { timer, timerStartAt } = computePlayerTimer(
             gameState,
             player.symbol,
@@ -109,7 +106,7 @@ const handleCellClick = useCallback((index) => {
       />
       <GameOverModal
         winnerName={winnerPlayer?.name}
-        players={PLAYERS.slice(0, PLAYERS_COUNT).map((player, index) => (
+        players={PLAYERS.slice(0, playersCount).map((player, index) => (
           <PlayerInfo
             key={player.id}
             avatar={player.avatar}

@@ -1,22 +1,24 @@
 import { Header } from "../components/header";
 import { Game } from "../components/game-new";
-import { UiTextField } from "../components/uikit/fields/ui-field-text";
-import { UiSelectField } from "../components/uikit/fields/ui-select-field";
 import { InputPersCount } from "../components/uikit/fields/ui-input-count-people";
+import { useState } from "react";
 
 export default function HomePage() {
-  const options = [
-    { label: "Option 1", value: "1" },
-    { label: "Option 2", value: "2" },
-    { label: "Option 3", value: "3" },
-  ];
+  const [showGame, setShowGame] = useState(false);
+  const [playersCount, setPlayersCount] = useState(null);
+
+  const handleGameStart = (count) => {
+    setPlayersCount(count);
+    setShowGame(true);
+  }
 
   return (
     <HomePageLayout header={<Header />}>
-      {/* <Game /> */}
-      <InputPersCount />
-      
-
+      {showGame ? (
+        <Game playersCount={playersCount} />
+      ) : (
+      <InputPersCount onGameStart={handleGameStart} />
+       )}
     </HomePageLayout>
   );
 }
@@ -29,11 +31,3 @@ function HomePageLayout({ header, children }) {
     </div>
   );
 }
-
-{/* <UiSelectField
-        label="Label "
-        placeholder="Placeholder"
-        required
-        helperText="helper text"
-        options={options}
-      /> */}

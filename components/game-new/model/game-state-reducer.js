@@ -4,6 +4,8 @@ import { getNextMove } from "./get-Next-Move";
 export const GAME_STATE_ACTIONS = {
   CELL_CLICK: "cell-click",
   TICK: "tick",
+  START_TIMER: "START TIMER",
+  SET_FIRST_MOVE: 'FIRST MOVE'
 };
 
 export const initGameState = ({

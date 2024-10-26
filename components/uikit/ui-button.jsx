@@ -9,7 +9,7 @@ import clsx from "clsx"
  * }} props
  */
 
-export function UiButton({ children, className, size, variant, disabled }) {
+export function UiButton({ children, className, size, variant, disabled, type }) {
   
     const ButtonClassname = clsx(
       'transition-colors', 
@@ -28,6 +28,6 @@ export function UiButton({ children, className, size, variant, disabled }) {
 
 
 return (
-    <button disabled={disabled} className={ButtonClassname}>{children}</button>
+    <button type={type} disabled={disabled} className={ButtonClassname}>{children}</button>
   )
 }
