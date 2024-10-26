@@ -1,7 +1,8 @@
 import { UiButton } from "../../uikit/ui-button";
 import { UiModel } from "../../uikit/ui-model";
 
-export function GameOverModal({ winnerName, players }) {
+export function GameOverModal({ winnerName, players, onClose, onRestart }) {
+  
   return (
     <UiModel
       width="md"

@@ -1,4 +1,4 @@
-import { PLAYERS } from "./ui/constans";
+import { PLAYERS as INITIAL_PLAYERS } from "./ui/constans";
 import { BackLink } from "./ui/game-link";
 import { GameInfo } from "./ui/game-info";
 import { GameLayout } from "./ui/game-layout";
@@ -13,7 +13,7 @@ import {
   initGameState,
 } from "./model/game-state-reducer";
 import { computeWinnerSymbol } from "./model/compute-winner-symbol";
-import { useCallback, useMemo, useReducer } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { computeWinner } from "./model/compute-winner";
 import { getNextMove } from "./model/get-Next-Move";
 import { computePlayerTimer } from "./model/compute-player-timer";
@@ -29,6 +29,36 @@ export function Game({ playersCount }) {
     },
     initGameState,
   );
+
+  const [players, setPlayers] = useState(INITIAL_PLAYERS);
+
+  useEffect(() => {
+    const LOGO_CATS = new Headers({
+      "Content-Type": "application/json",
+      "x-api-key":
+        "live_uDPasxIpK4LfPBmHY5dcfH8wBEhtbW317e5aGNPxoewX9iMTfd7qGOiaMZ4wzsTk",
+    });
+
+    const requestOptions = {
+      method: "GET",
+      headers: LOGO_CATS,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=4",
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const updatedPlayers = INITIAL_PLAYERS.map((player, index) => ({
+          ...player,
+          avatar: data[index]?.url || player.avatar, // Обновляем аватары, если получили данные
+        }));
+        setPlayers(updatedPlayers);
+      })
+      .catch((error) => console.log("Ошибка при загрузке аватаров", error));
+  }, []);
 
   useInterval(
     1000,
@@ -48,7 +78,7 @@ export function Game({ playersCount }) {
     nextMove,
   });
 
-  const winnerPlayer = PLAYERS.find((player) => player.symbol === winnerSymbol);
+  const winnerPlayer = players.find((player) => player.symbol === winnerSymbol);
 
   const handleCellClick = useCallback((index) => {
     dispatch({
@@ -72,7 +102,7 @@ export function Game({ playersCount }) {
             timeMode={"1 мин. на ход"}
           />
         }
-        playerList={PLAYERS.slice(0, playersCount).map((player, index) => {
+        playerList={players.slice(0, playersCount).map((player, index) => {
           const { timer, timerStartAt } = computePlayerTimer(
             gameState,
             player.symbol,
@@ -106,7 +136,7 @@ export function Game({ playersCount }) {
       />
       <GameOverModal
         winnerName={winnerPlayer?.name}
-        players={PLAYERS.slice(0, playersCount).map((player, index) => (
+        players={players.slice(0, playersCount).map((player, index) => (
           <PlayerInfo
             key={player.id}
             avatar={player.avatar}

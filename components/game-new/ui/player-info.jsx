@@ -30,7 +30,7 @@ export function PlayerInfo({
     <div className="flex gap-3 items-center">
       <div className={clsx("relative", isRight && "order-3")}>
         <div className="flex items-center gap-2 text-start text-teal-600 w-44">
-          <Image src={avatar} width={48} height={48} alt="user avatar" />
+          <Image src={avatar} width={48} height={48} alt="user avatar" className="w-12 h-12 rounded-full" />
           <div className="overflow-hidden">
             <div className="text-lg leading-tight truncate ">{name}</div>
             <div className="text-slate-400 text-xs leading-tight">
